@@ -8,8 +8,8 @@ class FellowVillains extends Component {
 
     state = {
         name: "",
-        powers: "",
-        hobbies: ""
+        message: "",
+        email: ""
     };
 
     componentWillMount() {
@@ -18,8 +18,8 @@ class FellowVillains extends Component {
     }
 
     addVillain() {
-        //const villain = { name: "Smoke Jumper", powers: "Can control fire and smoke", hobbies: "Hijacking, arson, poetry" };
-        const villain = { name: this.state.name, powers: this.state.powers, hobbies: this.state.hobbies };
+        //const villain = { name: "Smoke Jumper", powers: "Can control fire and smoke", email: "Hijacking, arson, poetry" };
+        const villain = { name: this.state.name, message: this.state.message, email: this.state.email };
         this.props.addVillain(villain);
         this.props.requestVillains();
     }
@@ -27,8 +27,8 @@ class FellowVillains extends Component {
     render() {
         return (
             <div>
-                <h1>Fellow villains</h1>
-                <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
+                <h1>Leave a message for Wei Wu</h1>
+                
                 {renderVillainsTable(this.props)}
 
                 <table>
@@ -42,18 +42,18 @@ class FellowVillains extends Component {
                     </tr>
                     <tr>
                         <td>
-                            Powers:
+                            Message:
                         </td>
                         <td>
-                            <input id="villainPowers" type="text" value={this.state.powers} onChange={(ev) => this.setState({ powers: ev.target.value })} />
+                            <input id="villainPowers" type="text" value={this.state.message} onChange={(ev) => this.setState({ message: ev.target.value })} />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Hobbies:
+                            email:
                         </td>
                         <td>
-                            <input id="villainHobbies" type="text" value={this.state.hobbies} onChange={(ev) => this.setState({ hobbies: ev.target.value })} />
+                            <input id="villainemail" type="text" value={this.state.email} onChange={(ev) => this.setState({ email: ev.target.value })} />
                         </td>
                     </tr>
                     <tr>
@@ -73,17 +73,17 @@ function renderVillainsTable(props) {
         <table className='table'>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Powers</th>
-                    <th>Hobbies</th>
+                    <th>From</th>
+                    <th>message</th>
+                    <th>email</th>
                 </tr>
             </thead>
             <tbody>
                 {props.villains.map(villain =>
                     <tr key={villain.name}>
                         <td>{villain.name}</td>
-                        <td>{villain.powers}</td>
-                        <td>{villain.hobbies}</td>
+                        <td>{villain.message}</td>
+                        <td>{villain.email}</td>
                     </tr>
                 )}
             </tbody>

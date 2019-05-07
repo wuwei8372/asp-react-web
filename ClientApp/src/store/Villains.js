@@ -5,19 +5,9 @@ const initialState = { villains: [], isLoading: false };
 
 const allvillains = [
     {
-        name: "Junq",
-        powers: "Can make weapons and gadgets out of anything available",
-        hobbies: "Crochet, macrame, kidnapping"
-    },
-    {
-        name: "Darkness",
-        powers: "Converts light into darkness",
-        hobbies: "Robbing banks, blackmail, puzzles"
-    },
-    {
-        name: "Blast Wave",
-        powers: "Generates concussive blasts with his hands",
-        hobbies: "General villainy, doggie dancing"
+        name: "Wei Wu",
+        message: "Please leave a message here if you have any thinkings about me",
+        email: "wuwei8372@gmail.com"
     }
 ]
 
@@ -25,6 +15,11 @@ export const actionCreators = {
     requestVillains: () => async (dispatch, getState) => {
 
         dispatch({ type: requestVillainsType });
+
+        const url = `api/Villains`;
+        const response = await fetch(url);
+        const allvillains = await response.json();
+        console.log(allvillains);
 
         dispatch({ type: receiveVillainsType, allvillains });
     },
@@ -56,7 +51,7 @@ export const reducer = (state, action) => {
     if (action.type === addVillainType) {
         var newvillains = allvillains;
 
-        newvillains.push({ name: action.villain.name, powers: action.villain.powers, hobbies: action.villain.hobbies })
+        newvillains.push({ name: action.villain.name, message: action.villain.powers, email: action.villain.email })
 
         return {
             ...state,
